@@ -1,0 +1,6 @@
+[
+    { "id": "js-basics", "title": "JavaScript Basics", "lessons": 3 },
+    { "id": "py-intro",   "title": "Python 101",      "lessons": 4 },
+    { "id": "ds-algos",   "title": "Data Structures & Algorithms", "lessons": 5 }
+  ]
+  
