@@ -1,94 +1,70 @@
-// /data/lessons.ts
+// AUTO‑GENERATED — do NOT edit by hand
+const lessons: Record<string,string[]> = {
+  'js-basics': [
+    "# Introduction to JavaScript\n\nWelcome to the **Introduction to JavaScript** lesson in the **js-basics** track.\n\n## 1. Introduction to JavaScript\n\nJavaScript runs in every browser and on servers (via Node.js), powering both front‑end and back‑end code.\n\n```js\n// Hello World\nconsole.log(\"Hello, CodeClimb!\");\n```",
+    "# Variables (let & const)\n\nWelcome to the **Variables (let & const)** lesson in the **js-basics** track.\n\n## 1. Variables (let & const)\n\nVariables store data. Use `const` for constants, and `let` for reassignable values.\n\n```js\nconst PI = 3.14;\nlet count = 0;\ncount++;\n```",
+    "# Primitive Data Types\n\nWelcome to the **Primitive Data Types** lesson in the **js-basics** track.\n\n## 1. Primitive Data Types\n\nStrings, numbers, booleans, null, undefined, symbols, and bigints are JavaScript’s primitives—immutable and copied by value.\n\n```js\nconsole.log(typeof \"hello\"); // \"string\"\nconsole.log(typeof 42);      // \"number\";\n```",
+    "# Type Coercion\n\nWelcome to the **Type Coercion** lesson in the **js-basics** track.\n\n## 1. Type Coercion\n\nIn this lesson you’ll learn about **Type Coercion**.\n\n```js\n// Example usage of Type Coercion\nconsole.log(\"Type Coercion\");\n```",
+    "# Operators\n\nWelcome to the **Operators** lesson in the **js-basics** track.\n\n## 1. Operators\n\nIn this lesson you’ll learn about **Operators**.\n\n```js\n// Example usage of Operators\nconsole.log(\"Operators\");\n```",
+    "# Control Flow (if/else)\n\nWelcome to the **Control Flow (if/else)** lesson in the **js-basics** track.\n\n## 1. Control Flow (if/else)\n\nIn this lesson you’ll learn about **Control Flow (if/else)**.\n\n```js\n// Example usage of Control Flow (if/else)\nconsole.log(\"Control Flow (if/else)\");\n```",
+    "# Loops (for, while)\n\nWelcome to the **Loops (for, while)** lesson in the **js-basics** track.\n\n## 1. Loops (for, while)\n\nIn this lesson you’ll learn about **Loops (for, while)**.\n\n```js\n// Example usage of Loops (for, while)\nconsole.log(\"Loops (for, while)\");\n```",
+    "# Functions & Arrow Functions\n\nWelcome to the **Functions & Arrow Functions** lesson in the **js-basics** track.\n\n## 1. Functions & Arrow Functions\n\nIn this lesson you’ll learn about **Functions & Arrow Functions**.\n\n```js\n// Example usage of Functions & Arrow Functions\nconsole.log(\"Functions & Arrow Functions\");\n```",
+    "# Scope & Closures\n\nWelcome to the **Scope & Closures** lesson in the **js-basics** track.\n\n## 1. Scope & Closures\n\nIn this lesson you’ll learn about **Scope & Closures**.\n\n```js\n// Example usage of Scope & Closures\nconsole.log(\"Scope & Closures\");\n```",
+    "# Hoisting\n\nWelcome to the **Hoisting** lesson in the **js-basics** track.\n\n## 1. Hoisting\n\nIn this lesson you’ll learn about **Hoisting**.\n\n```js\n// Example usage of Hoisting\nconsole.log(\"Hoisting\");\n```",
+    "# this & Context\n\nWelcome to the **this & Context** lesson in the **js-basics** track.\n\n## 1. this & Context\n\nIn this lesson you’ll learn about **this & Context**.\n\n```js\n// Example usage of this & Context\nconsole.log(\"this & Context\");\n```",
+    "# Arrays & Array Methods\n\nWelcome to the **Arrays & Array Methods** lesson in the **js-basics** track.\n\n## 1. Arrays & Array Methods\n\nIn this lesson you’ll learn about **Arrays & Array Methods**.\n\n```js\n// Example usage of Arrays & Array Methods\nconsole.log(\"Arrays & Array Methods\");\n```",
+    "# Objects & Object Methods\n\nWelcome to the **Objects & Object Methods** lesson in the **js-basics** track.\n\n## 1. Objects & Object Methods\n\nIn this lesson you’ll learn about **Objects & Object Methods**.\n\n```js\n// Example usage of Objects & Object Methods\nconsole.log(\"Objects & Object Methods\");\n```",
+    "# String Methods\n\nWelcome to the **String Methods** lesson in the **js-basics** track.\n\n## 1. String Methods\n\nIn this lesson you’ll learn about **String Methods**.\n\n```js\n// Example usage of String Methods\nconsole.log(\"String Methods\");\n```",
+    "# Number Methods\n\nWelcome to the **Number Methods** lesson in the **js-basics** track.\n\n## 1. Number Methods\n\nIn this lesson you’ll learn about **Number Methods**.\n\n```js\n// Example usage of Number Methods\nconsole.log(\"Number Methods\");\n```",
+    "# Template Literals\n\nWelcome to the **Template Literals** lesson in the **js-basics** track.\n\n## 1. Template Literals\n\nIn this lesson you’ll learn about **Template Literals**.\n\n```js\n// Example usage of Template Literals\nconsole.log(\"Template Literals\");\n```",
+    "# Destructuring Assignment\n\nWelcome to the **Destructuring Assignment** lesson in the **js-basics** track.\n\n## 1. Destructuring Assignment\n\nIn this lesson you’ll learn about **Destructuring Assignment**.\n\n```js\n// Example usage of Destructuring Assignment\nconsole.log(\"Destructuring Assignment\");\n```",
+    "# Spread & Rest Operators\n\nWelcome to the **Spread & Rest Operators** lesson in the **js-basics** track.\n\n## 1. Spread & Rest Operators\n\nIn this lesson you’ll learn about **Spread & Rest Operators**.\n\n```js\n// Example usage of Spread & Rest Operators\nconsole.log(\"Spread & Rest Operators\");\n```",
+    "# Default Parameters\n\nWelcome to the **Default Parameters** lesson in the **js-basics** track.\n\n## 1. Default Parameters\n\nIn this lesson you’ll learn about **Default Parameters**.\n\n```js\n// Example usage of Default Parameters\nconsole.log(\"Default Parameters\");\n```",
+    "# Optional Chaining\n\nWelcome to the **Optional Chaining** lesson in the **js-basics** track.\n\n## 1. Optional Chaining\n\nIn this lesson you’ll learn about **Optional Chaining**.\n\n```js\n// Example usage of Optional Chaining\nconsole.log(\"Optional Chaining\");\n```",
+    "# Nullish Coalescing\n\nWelcome to the **Nullish Coalescing** lesson in the **js-basics** track.\n\n## 1. Nullish Coalescing\n\nIn this lesson you’ll learn about **Nullish Coalescing**.\n\n```js\n// Example usage of Nullish Coalescing\nconsole.log(\"Nullish Coalescing\");\n```",
+    "# Symbols\n\nWelcome to the **Symbols** lesson in the **js-basics** track.\n\n## 1. Symbols\n\nIn this lesson you’ll learn about **Symbols**.\n\n```js\n// Example usage of Symbols\nconsole.log(\"Symbols\");\n```",
+    "# Iterators & Generators\n\nWelcome to the **Iterators & Generators** lesson in the **js-basics** track.\n\n## 1. Iterators & Generators\n\nIn this lesson you’ll learn about **Iterators & Generators**.\n\n```js\n// Example usage of Iterators & Generators\nconsole.log(\"Iterators & Generators\");\n```",
+    "# Regular Expressions\n\nWelcome to the **Regular Expressions** lesson in the **js-basics** track.\n\n## 1. Regular Expressions\n\nIn this lesson you’ll learn about **Regular Expressions**.\n\n```js\n// Example usage of Regular Expressions\nconsole.log(\"Regular Expressions\");\n```",
+    "# Date & Time API\n\nWelcome to the **Date & Time API** lesson in the **js-basics** track.\n\n## 1. Date & Time API\n\nIn this lesson you’ll learn about **Date & Time API**.\n\n```js\n// Example usage of Date & Time API\nconsole.log(\"Date & Time API\");\n```",
+    "# Error Handling (try/catch)\n\nWelcome to the **Error Handling (try/catch)** lesson in the **js-basics** track.\n\n## 1. Error Handling (try/catch)\n\nIn this lesson you’ll learn about **Error Handling (try/catch)**.\n\n```js\n// Example usage of Error Handling (try/catch)\nconsole.log(\"Error Handling (try/catch)\");\n```",
+    "# Promises\n\nWelcome to the **Promises** lesson in the **js-basics** track.\n\n## 1. Promises\n\nIn this lesson you’ll learn about **Promises**.\n\n```js\n// Example usage of Promises\nconsole.log(\"Promises\");\n```",
+    "# Async/Await\n\nWelcome to the **Async/Await** lesson in the **js-basics** track.\n\n## 1. Async/Await\n\nIn this lesson you’ll learn about **Async/Await**.\n\n```js\n// Example usage of Async/Await\nconsole.log(\"Async/Await\");\n```",
+    "# Event Loop & Concurrency\n\nWelcome to the **Event Loop & Concurrency** lesson in the **js-basics** track.\n\n## 1. Event Loop & Concurrency\n\nIn this lesson you’ll learn about **Event Loop & Concurrency**.\n\n```js\n// Example usage of Event Loop & Concurrency\nconsole.log(\"Event Loop & Concurrency\");\n```",
+    "# Fetch API\n\nWelcome to the **Fetch API** lesson in the **js-basics** track.\n\n## 1. Fetch API\n\nIn this lesson you’ll learn about **Fetch API**.\n\n```js\n// Example usage of Fetch API\nconsole.log(\"Fetch API\");\n```",
+  ],
 
-const lessons: Record<string, string[]> = {
-    'js-basics': [
-      `# JavaScript Basics
-  
-  JavaScript is a versatile, high‑level scripting language used in web development.
-  
-  ## Topics
-  1. Variables (let, const, var)  
-  2. Data Types (string, number, boolean)  
-  3. Functions and Arrow Functions`,
-      `# Variables
-  
-  Use \`let\` and \`const\` instead of \`var\`.
-    
-  \`\`\`js
-  let count = 0;
-  const name = "Alice";
-  \`\`\``,
-      `# Functions
-  
-  Regular:
-  \`\`\`js
-  function add(a, b) {
-    return a + b;
-  }
-  \`\`\`
-  
-  Arrow:
-  \`\`\`js
-  const add = (a, b) => a + b;
-  \`\`\``
-    ],
-    'py-intro': [
-      `# Python 101
-  
-  Python is a readable, interpreted language.
-  
-  ## Topics
-  - Indentation  
-  - Variables  
-  - Functions`,
-      `# Indentation
-  
-  Use 4 spaces per level:
-  \`\`\`py
-  def greet():
-      print("Hello")
-  \`\`\``,
-      `# Functions
-  
-  \`\`\`py
-  def add(a, b):
-      return a + b
-  \`\`\``
-    ],
-    'ds-algos': [
-      `# Data Structures & Algorithms
-  
-  Covers arrays, linked lists, sorting, searching.`,
-      `# Bubble Sort
-  
-  \`\`\`js
-  function bubbleSort(arr) {
-    // ...
-  }
-  \`\`\``,
-      `# Binary Search
-  
-  \`\`\`js
-  function binarySearch(arr, target) {
-    // ...
-  }
-  \`\`\``,
-      `# Linked Lists
-  
-  \`\`\`js
-  class Node {
-    constructor(val) {
-      this.val = val;
-      this.next = null;
-    }
-  }
-  \`\`\``,
-      `# Complexity
-  
-  - Time: O(n²) for bubble sort  
-  - Space: O(1)`
-    ]
-  };
-  
-  export default lessons;
-  
+  'py-intro': [
+    "# Python 101\n\nWelcome to the **Python 101** lesson in the **py-intro** track.\n\n## 1. Python 101\n\nPython is a high‑level, interpreted language with clear syntax and a vast standard library.\n\n```py\n# Hello World in Python\nprint(\"Hello, CodeClimb!\")\n```",
+    "# Indentation\n\nWelcome to the **Indentation** lesson in the **py-intro** track.\n\n## 1. Indentation\n\nIn this lesson you’ll learn about **Indentation**.\n\n```py\n# Example usage of Indentation\nprint(\"Indentation\")\n```",
+    "# Functions\n\nWelcome to the **Functions** lesson in the **py-intro** track.\n\n## 1. Functions\n\nIn this lesson you’ll learn about **Functions**.\n\n```py\n# Example usage of Functions\nprint(\"Functions\")\n```",
+    "# Lists & Tuples\n\nWelcome to the **Lists & Tuples** lesson in the **py-intro** track.\n\n## 1. Lists & Tuples\n\nIn this lesson you’ll learn about **Lists & Tuples**.\n\n```py\n# Example usage of Lists & Tuples\nprint(\"Lists & Tuples\")\n```",
+    "# Dictionaries & Sets\n\nWelcome to the **Dictionaries & Sets** lesson in the **py-intro** track.\n\n## 1. Dictionaries & Sets\n\nIn this lesson you’ll learn about **Dictionaries & Sets**.\n\n```py\n# Example usage of Dictionaries & Sets\nprint(\"Dictionaries & Sets\")\n```",
+    "# Comprehensions\n\nWelcome to the **Comprehensions** lesson in the **py-intro** track.\n\n## 1. Comprehensions\n\nIn this lesson you’ll learn about **Comprehensions**.\n\n```py\n# Example usage of Comprehensions\nprint(\"Comprehensions\")\n```",
+    "# Modules & Packages\n\nWelcome to the **Modules & Packages** lesson in the **py-intro** track.\n\n## 1. Modules & Packages\n\nIn this lesson you’ll learn about **Modules & Packages**.\n\n```py\n# Example usage of Modules & Packages\nprint(\"Modules & Packages\")\n```",
+    "# File I/O\n\nWelcome to the **File I/O** lesson in the **py-intro** track.\n\n## 1. File I/O\n\nIn this lesson you’ll learn about **File I/O**.\n\n```py\n# Example usage of File I/O\nprint(\"File I/O\")\n```",
+    "# Error Handling\n\nWelcome to the **Error Handling** lesson in the **py-intro** track.\n\n## 1. Error Handling\n\nIn this lesson you’ll learn about **Error Handling**.\n\n```py\n# Example usage of Error Handling\nprint(\"Error Handling\")\n```",
+  ],
+
+  'ds-algos': [
+    "# Data Structures & Algorithms\n\nWelcome to the **Data Structures & Algorithms** lesson in the **ds-algos** track.\n\n## 1. Data Structures & Algorithms\n\nData structures organize information; algorithms manipulate them to solve real‑world problems efficiently.\n\n```js\n// Pseudocode: traverse a list\nfor (item of list) {\n  process(item);\n}\n```",
+    "# Bubble Sort\n\nWelcome to the **Bubble Sort** lesson in the **ds-algos** track.\n\n## 1. Bubble Sort\n\nIn this lesson you’ll learn about **Bubble Sort**.\n\n```js\n// Example usage of Bubble Sort\nconsole.log(\"Bubble Sort\");\n```",
+    "# Binary Search\n\nWelcome to the **Binary Search** lesson in the **ds-algos** track.\n\n## 1. Binary Search\n\nIn this lesson you’ll learn about **Binary Search**.\n\n```js\n// Example usage of Binary Search\nconsole.log(\"Binary Search\");\n```",
+    "# Linked Lists\n\nWelcome to the **Linked Lists** lesson in the **ds-algos** track.\n\n## 1. Linked Lists\n\nIn this lesson you’ll learn about **Linked Lists**.\n\n```js\n// Example usage of Linked Lists\nconsole.log(\"Linked Lists\");\n```",
+    "# Stacks & Queues\n\nWelcome to the **Stacks & Queues** lesson in the **ds-algos** track.\n\n## 1. Stacks & Queues\n\nIn this lesson you’ll learn about **Stacks & Queues**.\n\n```js\n// Example usage of Stacks & Queues\nconsole.log(\"Stacks & Queues\");\n```",
+    "# Trees\n\nWelcome to the **Trees** lesson in the **ds-algos** track.\n\n## 1. Trees\n\nIn this lesson you’ll learn about **Trees**.\n\n```js\n// Example usage of Trees\nconsole.log(\"Trees\");\n```",
+    "# Graphs\n\nWelcome to the **Graphs** lesson in the **ds-algos** track.\n\n## 1. Graphs\n\nIn this lesson you’ll learn about **Graphs**.\n\n```js\n// Example usage of Graphs\nconsole.log(\"Graphs\");\n```",
+    "# Hash Tables\n\nWelcome to the **Hash Tables** lesson in the **ds-algos** track.\n\n## 1. Hash Tables\n\nIn this lesson you’ll learn about **Hash Tables**.\n\n```js\n// Example usage of Hash Tables\nconsole.log(\"Hash Tables\");\n```",
+    "# Heaps\n\nWelcome to the **Heaps** lesson in the **ds-algos** track.\n\n## 1. Heaps\n\nIn this lesson you’ll learn about **Heaps**.\n\n```js\n// Example usage of Heaps\nconsole.log(\"Heaps\");\n```",
+    "# Tries\n\nWelcome to the **Tries** lesson in the **ds-algos** track.\n\n## 1. Tries\n\nIn this lesson you’ll learn about **Tries**.\n\n```js\n// Example usage of Tries\nconsole.log(\"Tries\");\n```",
+    "# Big O Notation\n\nWelcome to the **Big O Notation** lesson in the **ds-algos** track.\n\n## 1. Big O Notation\n\nIn this lesson you’ll learn about **Big O Notation**.\n\n```js\n// Example usage of Big O Notation\nconsole.log(\"Big O Notation\");\n```",
+    "# Sorting Algorithms\n\nWelcome to the **Sorting Algorithms** lesson in the **ds-algos** track.\n\n## 1. Sorting Algorithms\n\nIn this lesson you’ll learn about **Sorting Algorithms**.\n\n```js\n// Example usage of Sorting Algorithms\nconsole.log(\"Sorting Algorithms\");\n```",
+    "# Searching Algorithms\n\nWelcome to the **Searching Algorithms** lesson in the **ds-algos** track.\n\n## 1. Searching Algorithms\n\nIn this lesson you’ll learn about **Searching Algorithms**.\n\n```js\n// Example usage of Searching Algorithms\nconsole.log(\"Searching Algorithms\");\n```",
+    "# Dynamic Programming\n\nWelcome to the **Dynamic Programming** lesson in the **ds-algos** track.\n\n## 1. Dynamic Programming\n\nIn this lesson you’ll learn about **Dynamic Programming**.\n\n```js\n// Example usage of Dynamic Programming\nconsole.log(\"Dynamic Programming\");\n```",
+    "# Greedy Algorithms\n\nWelcome to the **Greedy Algorithms** lesson in the **ds-algos** track.\n\n## 1. Greedy Algorithms\n\nIn this lesson you’ll learn about **Greedy Algorithms**.\n\n```js\n// Example usage of Greedy Algorithms\nconsole.log(\"Greedy Algorithms\");\n```",
+    "# Divide & Conquer\n\nWelcome to the **Divide & Conquer** lesson in the **ds-algos** track.\n\n## 1. Divide & Conquer\n\nIn this lesson you’ll learn about **Divide & Conquer**.\n\n```js\n// Example usage of Divide & Conquer\nconsole.log(\"Divide & Conquer\");\n```",
+    "# Backtracking\n\nWelcome to the **Backtracking** lesson in the **ds-algos** track.\n\n## 1. Backtracking\n\nIn this lesson you’ll learn about **Backtracking**.\n\n```js\n// Example usage of Backtracking\nconsole.log(\"Backtracking\");\n```",
+  ],
+
+};
+
+export default lessons;

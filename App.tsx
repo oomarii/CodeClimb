@@ -12,9 +12,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 
-import { getColors, Typography } from './theme';
+import { getColors } from './theme';
 import Home from './screens/Home';
 import CourseList from './screens/CourseList';
+import CourseDetail from './screens/CourseDetail';
 import LessonView from './screens/LessonView';
 import QuizView from './screens/QuizView';
 import Profile from './screens/Profile';
@@ -22,13 +23,14 @@ import Profile from './screens/Profile';
 export type RootStackParamList = {
   Home: undefined;
   Courses: undefined;
+  CourseDetail: { courseId: string };
   Lesson: { courseId: string; lessonId: string };
-  Quiz: { courseId: string; lessonId: string };
+  Quiz:   { courseId: string; lessonId: string };
   Profile: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator();
+const Tab   = createBottomTabNavigator();
 
 function CoursesStack() {
   const scheme = useColorScheme();
@@ -38,26 +40,27 @@ function CoursesStack() {
     <Stack.Navigator
       initialRouteName="Courses"
       screenOptions={{
-        headerShown: false,
-        contentStyle: { backgroundColor: Colors.bg }
+        headerShown:   false,
+        contentStyle:  { backgroundColor: Colors.bg }
       }}
     >
-      <Stack.Screen name="Courses" component={CourseList} />
-      <Stack.Screen name="Lesson" component={LessonView} />
-      <Stack.Screen name="Quiz" component={QuizView} />
+      <Stack.Screen name="Courses"      component={CourseList} />
+      <Stack.Screen name="CourseDetail" component={CourseDetail} />
+      <Stack.Screen name="Lesson"       component={LessonView} />
+      <Stack.Screen name="Quiz"         component={QuizView} />
     </Stack.Navigator>
   );
 }
 
 export default function App() {
   const scheme = useColorScheme();
-  const Colors = getColors('light'); // force light
+  const Colors = getColors(scheme);
 
   const [fontsLoaded] = useFonts({
-    Manrope: require('./assets/fonts/Manrope-Regular.ttf'),
-    'Manrope-Bold': require('./assets/fonts/Manrope-Bold.ttf'),
+    Manrope:          require('./assets/fonts/Manrope-Regular.ttf'),
+    'Manrope-Bold':   require('./assets/fonts/Manrope-Bold.ttf'),
     'Manrope-Medium': require('./assets/fonts/Manrope-Medium.ttf'),
-    'Manrope-Light': require('./assets/fonts/Manrope-Light.ttf')
+    'Manrope-Light':  require('./assets/fonts/Manrope-Light.ttf')
   });
 
   if (!fontsLoaded) {
@@ -73,10 +76,10 @@ export default function App() {
     colors: {
       ...DefaultTheme.colors,
       background: Colors.bg,
-      card: Colors.card,
-      text: Colors.text,
-      border: Colors.border,
-      primary: Colors.primary
+      card:       Colors.card,
+      text:       Colors.text,
+      border:     Colors.border,
+      primary:    Colors.primary
     }
   };
 
@@ -84,11 +87,11 @@ export default function App() {
     <NavigationContainer theme={navTheme}>
       <Tab.Navigator
         screenOptions={{
-          headerShown: false,
-          tabBarStyle: { display: 'none' } // hiding built-in tab bar
+          headerShown: false,        // we use custom headers in each screen
+          tabBarStyle: { display: 'none' }
         }}
       >
-        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Home"    component={Home} />
         <Tab.Screen name="Courses" component={CoursesStack} />
         <Tab.Screen name="Profile" component={Profile} />
       </Tab.Navigator>

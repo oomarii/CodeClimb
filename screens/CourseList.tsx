@@ -1,3 +1,5 @@
+// screens/CourseList.tsx
+
 import React, { useEffect, useState } from 'react';
 import {
   View,
@@ -6,13 +8,15 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  SafeAreaView,
+  ScrollView,
   useColorScheme
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import coursesData from '../data/courses.json';
-import { RootStackParamList } from '../navigation';
-import { getColors } from '../theme';
+import { RootStackParamList } from '../App';
+import { getColors, Typography } from '../theme';
 import BottomNav from './BottomNav';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Courses'>;
@@ -23,7 +27,7 @@ export default function CourseList({ navigation }: Props) {
   const styles = getStyles(Colors);
 
   const [progress, setProgress] = useState<Record<string, number>>({});
-  const [query, setQuery] = useState('');
+  const [query, setQuery]       = useState('');
   const [filtered, setFiltered] = useState(coursesData);
 
   useEffect(() => {
@@ -46,14 +50,13 @@ export default function CourseList({ navigation }: Props) {
         style={styles.card}
         activeOpacity={0.85}
         onPress={() =>
-          navigation.navigate('Lesson', {
-            courseId: item.id,
-            lessonId: '1'
-          })
+          navigation.navigate('CourseDetail', { courseId: item.id })
         }
       >
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.subtitle}>{pct}% complete</Text>
+        <Text style={[Typography.h2, { color: Colors.text }]}>{item.title}</Text>
+        <Text style={[Typography.small, { color: Colors.subtext, marginTop: 4 }]}>
+          {pct}% complete
+        </Text>
         <View style={styles.progressBar}>
           <View
             style={[
@@ -68,30 +71,51 @@ export default function CourseList({ navigation }: Props) {
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={[styles.safe, { backgroundColor: Colors.bg }]}>
-        <Text style={styles.header}>Courses</Text>
-
-        <TextInput
-          style={styles.search}
-          placeholder="Search courses..."
-          placeholderTextColor={Colors.subtext}
-          value={query}
-          onChangeText={setQuery}
-        />
-
-        <FlatList
-          data={filtered}
-          keyExtractor={i => i.id}
-          renderItem={renderItem}
-          contentContainerStyle={styles.list}
+      <SafeAreaView style={[styles.safe, { backgroundColor: Colors.bg }]}>
+        <ScrollView
+          contentContainerStyle={styles.container}
           showsVerticalScrollIndicator={false}
-          ListEmptyComponent={() => (
-            <View style={styles.empty}>
-              <Text style={styles.subtitle}>No courses found.</Text>
-            </View>
-          )}
-        />
-      </View>
+        >
+          {/* Centered header like the Home logo */}
+          <Text style={[styles.header, { color: Colors.primary }]}>
+            Courses
+          </Text>
+
+          {/* Search bar */}
+          <TextInput
+            style={[
+              styles.search,
+              {
+                backgroundColor: Colors.card,
+                borderColor: Colors.border,
+                color: Colors.text
+              }
+            ]}
+            placeholder="Search courses..."
+            placeholderTextColor={Colors.subtext}
+            value={query}
+            onChangeText={setQuery}
+          />
+
+          {/* Course list */}
+          <FlatList
+            data={filtered}
+            keyExtractor={i => i.id}
+            renderItem={renderItem}
+            contentContainerStyle={styles.list}
+            showsVerticalScrollIndicator={false}
+            ListEmptyComponent={() => (
+              <View style={styles.empty}>
+                <Text style={[Typography.body, { color: Colors.subtext }]}>
+                  No courses found.
+                </Text>
+              </View>
+            )}
+          />
+        </ScrollView>
+      </SafeAreaView>
+
+      {/* Custom bottom nav */}
       <BottomNav />
     </View>
   );
@@ -100,31 +124,29 @@ export default function CourseList({ navigation }: Props) {
 const getStyles = (Colors: ReturnType<typeof getColors>) =>
   StyleSheet.create({
     safe: {
-      flex: 1,
+      flex: 1
+    },
+    container: {
       paddingTop: 48,
       paddingHorizontal: 24,
-      paddingBottom: 100
+      paddingBottom: 120
     },
     header: {
       fontSize: 24,
       fontWeight: '600',
       textAlign: 'center',
-      color: Colors.primary,
       marginBottom: 20
     },
     search: {
-      backgroundColor: Colors.card,
-      borderRadius: 10,
       borderWidth: 1,
-      borderColor: Colors.border,
+      borderRadius: 10,
       paddingHorizontal: 14,
       paddingVertical: 10,
       marginBottom: 20,
-      fontSize: 16,
-      color: Colors.text
+      ...Typography.body
     },
     list: {
-      paddingBottom: 20
+      paddingBottom: 16
     },
     card: {
       backgroundColor: Colors.card,
@@ -137,22 +159,12 @@ const getStyles = (Colors: ReturnType<typeof getColors>) =>
       shadowRadius: 8,
       elevation: 3
     },
-    title: {
-      fontSize: 18,
-      fontWeight: '600',
-      color: Colors.text
-    },
-    subtitle: {
-      fontSize: 14,
-      color: Colors.subtext,
-      marginTop: 4
-    },
     progressBar: {
       height: 6,
       backgroundColor: Colors.border,
       borderRadius: 3,
       overflow: 'hidden',
-      marginTop: 10
+      marginTop: 12
     },
     progressFill: {
       height: '100%'

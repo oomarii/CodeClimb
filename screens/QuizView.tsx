@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+// screens/QuizView.tsx
+
+import React, { useState, useEffect } from 'react';
 import {
+  SafeAreaView,
   View,
+  ScrollView,
   Text,
   Pressable,
   StyleSheet,
   Alert,
   useWindowDimensions,
-  useColorScheme,
-  SafeAreaView,
-  ScrollView
+  useColorScheme
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -20,44 +22,45 @@ import type { RootStackParamList } from '../App';
 type Props = NativeStackScreenProps<RootStackParamList, 'Quiz'>;
 
 export default function QuizView({ route, navigation }: Props) {
-  const scheme = useColorScheme();
-  const Colors = getColors(scheme);
-
   const { courseId, lessonId } = route.params;
-  const lessonIndex = parseInt(lessonId, 10) - 1;
+  const lessonIndex = Number(lessonId) - 1;
   const questions: Question[] = quizzes[courseId]?.[lessonIndex] || [];
 
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
-  const { width } = useWindowDimensions();
 
+  const { width } = useWindowDimensions();
+  const Colors   = getColors(useColorScheme());
+  const styles   = getStyles(Colors);
+
+  // If no quiz available
   if (questions.length === 0) {
     return (
-      <View style={[styles.empty, { backgroundColor: Colors.bg }]}>
-        <Text style={[Typography.h2, { color: Colors.text }]}>
+      <SafeAreaView style={[styles.safe, { backgroundColor: Colors.bg }]}>
+        <Text style={[Typography.h2, { color: Colors.text, textAlign: 'center', marginTop: 48 }]}>
           No quiz for this lesson.
         </Text>
-      </View>
+      </SafeAreaView>
     );
   }
 
-  const question = questions[current];
-  const isLast = current === questions.length - 1;
-  const progressWidth = ((current + 1) / questions.length) * width;
+  const question  = questions[current];
+  const isLast    = current === questions.length - 1;
+  const progressW = (width - 48) * ((current + 1) / questions.length);
 
+  // Advance or finish
   const finishQuiz = async () => {
-    const rawProg = await AsyncStorage.getItem('courseProgress');
-    const prog = rawProg ? JSON.parse(rawProg) : {};
+    // update progress
+    const raw = await AsyncStorage.getItem('courseProgress');
+    const prog = raw ? JSON.parse(raw) : {};
     const totalLessons = quizzes[courseId]?.length || 1;
-    prog[courseId] = Math.min(
-      100,
-      Math.round(((prog[courseId] ?? 0) + 1) / totalLessons * 100)
-    );
+    prog[courseId] = Math.min(100, Math.round(((prog[courseId] || 0) + 1) / totalLessons * 100));
     await AsyncStorage.setItem('courseProgress', JSON.stringify(prog));
 
+    // log date
     const today = new Date().toISOString().split('T')[0];
-    const rawDates = await AsyncStorage.getItem('studyDates');
-    const dates: string[] = rawDates ? JSON.parse(rawDates) : [];
+    const datesRaw = await AsyncStorage.getItem('studyDates');
+    const dates: string[] = datesRaw ? JSON.parse(datesRaw) : [];
     if (!dates.includes(today)) {
       dates.push(today);
       await AsyncStorage.setItem('studyDates', JSON.stringify(dates));
@@ -66,7 +69,8 @@ export default function QuizView({ route, navigation }: Props) {
     navigation.popToTop();
   };
 
-  const handleSubmit = () => {
+  // Handle Next/Finish
+  const handleNext = () => {
     if (selected === null) {
       Alert.alert('Please select an answer first.');
       return;
@@ -77,7 +81,7 @@ export default function QuizView({ route, navigation }: Props) {
       '',
       [
         {
-          text: isLast ? 'Finish Quiz' : 'Next',
+          text: isLast ? 'Finish' : 'Next',
           onPress: () => {
             if (isLast) {
               finishQuiz();
@@ -91,20 +95,37 @@ export default function QuizView({ route, navigation }: Props) {
     );
   };
 
+  // Go back one question
+  const handlePrev = () => {
+    if (current > 0) {
+      setCurrent(c => c - 1);
+      setSelected(null);
+    }
+  };
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.bg }}>
-      <View style={[styles.progressBarContainer, { backgroundColor: Colors.bg }]}>
+    <SafeAreaView style={[styles.safe, { backgroundColor: Colors.bg }]}>
+      {/* Header */}
+      <View style={styles.titleRow}>
+        <Pressable onPress={() => navigation.goBack()} style={styles.backButton}>
+          <Ionicons name="chevron-back" size={24} color={Colors.primary} />
+        </Pressable>
+        <Text style={[styles.titleText, { color: Colors.primary }]}>Quiz</Text>
+      </View>
+
+      {/* Progress */}
+      <View style={styles.progressWrapper}>
         <View style={[styles.progressBar, { backgroundColor: Colors.border }]}>
-          <View
-            style={[
-              styles.progressFill,
-              { backgroundColor: Colors.primary, width: progressWidth }
-            ]}
-          />
+          <View style={[styles.progressFill, { width: progressW, backgroundColor: Colors.primary }]} />
         </View>
       </View>
 
-      <ScrollView contentContainerStyle={[styles.container, { backgroundColor: Colors.bg }]}>
+      {/* Questions */}
+      <ScrollView
+        style={styles.flex}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
         <Text style={[styles.prompt, { color: Colors.text }]}>
           {`Q${current + 1}. ${question.prompt}`}
         </Text>
@@ -112,90 +133,105 @@ export default function QuizView({ route, navigation }: Props) {
         {question.options.map((opt, i) => (
           <Pressable
             key={i}
+            onPress={() => setSelected(i)}
             style={[
               styles.option,
               {
-                backgroundColor: selected === i ? Colors.secondary : Colors.card,
-                borderColor: selected === i ? Colors.secondary : Colors.border
+                backgroundColor: selected === i ? Colors.primary : Colors.card,
+                borderColor:     selected === i ? Colors.primary : Colors.border
               }
             ]}
-            onPress={() => setSelected(i)}
           >
-            <Text style={[styles.optionText, { color: Colors.text }]}>{opt}</Text>
+            <Text
+              style={[
+                styles.optionText,
+                { color: selected === i ? Colors.card : Colors.text }
+              ]}
+            >
+              {opt}
+            </Text>
           </Pressable>
         ))}
+
+        {/* spacer so content never hides behind FABs */}
+        <View style={{ height: 120 }} />
       </ScrollView>
 
-      <View style={[styles.footer, { borderTopColor: Colors.border, backgroundColor: Colors.bg }]}>
+      {/* Fixed Arrows at bottom */}
+      <View style={styles.fabContainer}>
+        {current > 0 && (
+          <Pressable
+            onPress={handlePrev}
+            style={[styles.fab, { backgroundColor: Colors.primary }]}
+          >
+            <Ionicons name="chevron-back" size={24} color={Colors.card} />
+          </Pressable>
+        )}
         <Pressable
-          style={[
-            styles.submitBtn,
-            {
-              backgroundColor:
-                selected === null ? Colors.border : Colors.primary
-            }
-          ]}
-          onPress={handleSubmit}
+          onPress={handleNext}
+          style={[styles.fab, { backgroundColor: Colors.primary }]}
         >
-          <Text style={[styles.submitText, { color: Colors.card }]}>
-            {isLast ? 'Finish Quiz' : 'Submit Answer'}
-          </Text>
-          <Ionicons name="arrow-forward" size={18} color={Colors.card} style={{ marginLeft: 6 }} />
+          <Ionicons
+            name={isLast ? 'checkmark' : 'chevron-forward'}
+            size={24}
+            color={Colors.card}
+          />
         </Pressable>
       </View>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    paddingBottom: 120
-  },
-  progressBarContainer: {
-    paddingHorizontal: 20,
-    paddingTop: 12
-  },
-  progressBar: {
-    height: 4,
-    borderRadius: 2
-  },
-  progressFill: {
-    height: '100%',
-    borderRadius: 2
-  },
-  prompt: {
-    ...Typography.h2,
-    marginBottom: 24
-  },
-  option: {
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    marginBottom: 14
-  },
-  optionText: {
-    ...Typography.body
-  },
-  footer: {
-    padding: 16,
-    borderTopWidth: 1
-  },
-  submitBtn: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 14,
-    borderRadius: 10
-  },
-  submitText: {
-    ...Typography.body,
-    fontWeight: '600'
-  },
-  empty: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-});
+const getStyles = (Colors: ReturnType<typeof getColors>) =>
+  StyleSheet.create({
+    safe:            { flex: 1, position: 'relative' },
+    flex:            { flex: 1 },
+    titleRow:        {
+                      flexDirection: 'row',
+                      alignItems:    'center',
+                      paddingTop:    48,
+                      paddingHorizontal: 24,
+                      marginBottom:  16
+                    },
+    backButton:      { marginRight: 12 },
+    titleText:       { ...Typography.h2 },
+
+    progressWrapper: { paddingHorizontal: 24, marginBottom: 16 },
+    progressBar:     { width: '100%', height: 4, borderRadius: 2 },
+    progressFill:    { height: '100%' },
+
+    scrollContent:   { paddingHorizontal: 24 },
+    prompt:          { ...Typography.h2, marginBottom: 24 },
+
+    option:          {
+                      borderWidth:      1,
+                      borderRadius:     8,
+                      paddingVertical:  14,
+                      paddingHorizontal:16,
+                      marginBottom:     12
+                    },
+    optionText:      { ...Typography.body },
+
+    fabContainer:    {
+                      position:      'absolute',
+                      bottom:        24,
+                      left:          0,
+                      right:         0,
+                      flexDirection: 'row',
+                      justifyContent:'center',
+                      alignItems:    'center'
+                    },
+    fab:             {
+                      width:           48,
+                      height:          48,
+                      marginHorizontal:12,
+                      borderRadius:    24,
+                      alignItems:      'center',
+                      justifyContent:  'center',
+                      shadowColor:     '#000',
+                      shadowOpacity:   0.15,
+                      shadowOffset:    { width: 0, height: 4 },
+                      shadowRadius:    8,
+                      elevation:       4
+                    }
+  });
